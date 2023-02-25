@@ -1,5 +1,4 @@
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.*;
 
 public class JavaHomework5 {
 
@@ -33,5 +32,14 @@ public class JavaHomework5 {
     public static void main(String[] args) {
         var laptopColl = LaptopCollection();
         System.out.println(laptopColl);
+
+        Map<String, Object> filters = new HashMap<>();
+        filters.put("brand", "brand1");
+        filters.put("os", "os1");
+        filters.put("ram", 16);
+        filters.put("hardDrive", 512);
+        filters.put("cpuFrequency", 3.11F);
+        filters.put("screenDiagonal", 13.3F);
+
     }
 }
