@@ -27,19 +27,75 @@ public class JavaHomework5 {
         laptop3.cpuFrequency = 3.23F;
         laptop3.screenDiagonal = 16.2F;
 
-        return new HashSet<Laptops>(Arrays.asList(laptop1, laptop2, laptop3));
+        return new HashSet<>(Arrays.asList(laptop1, laptop2, laptop3));
     }
     public static void main(String[] args) {
         var laptopColl = LaptopCollection();
-        System.out.println(laptopColl);
+//        System.out.println(laptopColl);
 
         Map<String, Object> filters = new HashMap<>();
-        filters.put("brand", "brand1");
-        filters.put("os", "os1");
-        filters.put("ram", 16);
-        filters.put("hardDrive", 512);
-        filters.put("cpuFrequency", 3.11F);
-        filters.put("screenDiagonal", 13.3F);
+        filters.put("brand", "brand2");
+//        filters.put("os", "os1");
+//        filters.put("ram", 16);
+//        filters.put("hardDrive", 512);
+//        filters.put("cpuFrequency", 3.11F);
+//        filters.put("screenDiagonal", 13.3F);
 
+        Set<Laptops> filteredLaptops = filterLaptops(laptopColl, filters);
+        System.out.println(filteredLaptops);
+    }
+
+    private static Set<Laptops> filterLaptops(Set<Laptops> laptops, Map<String, Object> filters){
+        Set<Laptops> filteredLaptops = new HashSet<>();
+
+        for (Laptops laptop : laptops){
+            boolean match = true;
+
+            for (String key : filters.keySet()){
+                Object value = filters.get(key);
+
+                switch (key) {
+                    case "brand" -> {
+                        if (!laptop.getBrand().equals(value)) {
+                            match = false;
+                        }
+                    }
+                    case "os" -> {
+                        if (!laptop.getOs().equals(value)) {
+                            match = false;
+                        }
+                    }
+                    case "ram" -> {
+                        if (laptop.getRam() != (int) value) {
+                            match = false;
+                        }
+                    }
+                    case "hardDrive" -> {
+                        if (laptop.getHardDrive() != (int) value) {
+                            match = false;
+                        }
+                    }
+                    case "cpuFrequency" -> {
+                        if (laptop.getCpuFrequency() != (float) value) {
+                            match = false;
+                        }
+                    }
+                    case "screenDiagonal" -> {
+                        if (laptop.getScreenDiagonal() != (float) value) {
+                            match = false;
+                        }
+                    }
+                }
+
+                if (!match){
+                    break;
+                }
+            }
+
+            if (match){
+                filteredLaptops.add(laptop);
+            }
+        }
+        return filteredLaptops;
     }
 }
